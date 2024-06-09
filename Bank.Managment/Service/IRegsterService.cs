@@ -4,11 +4,11 @@
 
 using Bank.Managment.Models;
 
-namespace Bank.Managment.Broker.Storeage
+namespace Bank.Managment.Service
 {
-    internal interface IStoreageBroker
+    internal interface IRegsterService
     {
-        Users AddUser(Users user);
-        bool GetUser(Users user);
+        bool LogIn(Users user);
+        Users SignUp(Users user);
     }
 }
