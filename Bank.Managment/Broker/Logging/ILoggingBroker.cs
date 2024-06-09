@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//----------------------------------------
+// Great Code Team (c) All rights reserved
+//----------------------------------------
 
 namespace Bank.Managment.Broker.Logging
 {
     internal interface ILoggingBroker
     {
+        void LogInformation(string message);
+        void LogError(string userMessage);
     }
 }
