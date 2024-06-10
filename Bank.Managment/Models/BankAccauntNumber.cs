@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bank.Managment.Models
 {
-    internal class Customer
+    internal class BankAccauntNumber
     {
-        public string Name { get; set; }
-        public decimal AccountNumber {  get; set; }
-        public decimal Balance {  get; set; }
+        public decimal AccountNumber { get; set; }
+        public decimal Balance { get; set; }
     }
 }
