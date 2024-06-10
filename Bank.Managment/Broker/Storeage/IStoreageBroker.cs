@@ -10,5 +10,6 @@ namespace Bank.Managment.Broker.Storeage
     {
         Users AddUser(Users user);
         bool GetUser(Users user);
+        bool LogIn(Users user);
     }
 }
