@@ -10,7 +10,7 @@ namespace Bank.Managment.Broker.Storeage
     {
         internal class RegisterBroker : IStoreageBroker
         {
-            private readonly string filePath = "../../../Assets/RegistrFileDb.txt";
+            private readonly string filePath = "../../../Asets/RegistrManagmentFile.txt";
 
             public RegisterBroker()
             {
@@ -38,10 +38,7 @@ namespace Bank.Managment.Broker.Storeage
                 return user;
             }
 
-            public Users AddUser(Users user)
-            {
-                throw new NotImplementedException();
-            }
+            public Users AddUsers(Users user) => throw new NotImplementedException();
 
             public bool GetUser(Users user)
             {
@@ -62,7 +59,7 @@ namespace Bank.Managment.Broker.Storeage
                 return false;
             }
 
-            public bool GetUser(Users user) => throw new NotImplementedException();
+            public bool GetUsers(Users user) => throw new NotImplementedException();
 
             private void EnsureFileExists()
             {
