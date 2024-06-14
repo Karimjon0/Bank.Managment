@@ -5,7 +5,8 @@
 using Bank.Managment.Broker.Logging;
 using Bank.Managment.Broker.Storeage;
 using Bank.Managment.Models;
-using static Bank.Managment.Broker.Logging.LggingBroker;
+using static Bank.Managment.Broker.Logging.LoggingBroker;
+using static Bank.Managment.Broker.Storeage.StoreageBroker;
 using static Bank.Managment.Service.RegsterService;
 
 namespace Bank.Managment.Service
@@ -18,7 +19,7 @@ namespace Bank.Managment.Service
             private readonly IStoreageBroker registerBroker;
             public RegisterService()
             {
-                this.loggingBroker = new LoggingBroker();
+                this.loggingBroker = new Broker.Logging.LoggingBroker.LoggingBroker();
                 this.registerBroker = new RegisterBroker();
             }
             public bool LogIn(Users user)

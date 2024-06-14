@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Bank.Managment.Broker.Logging.LggingBroker;
+using static Bank.Managment.Broker.Logging.LoggingBroker;
 using static Bank.Managment.Broker.Storeage.StoreageBroker;
 
 namespace Bank.Managment.Fountions
@@ -20,7 +20,7 @@ namespace Bank.Managment.Fountions
 
             public RegistrService()
             {
-                this.loggingBroker = new LoggingBroker();
+                this.loggingBroker = new Broker.Logging.LoggingBroker.LoggingBroker();
                 this.registrBroker = new RegisterBroker();
             }
             public bool LogIn(Users user)
