@@ -3,10 +3,10 @@
 //----------------------------------------
 
 using Bank.Managment.Broker.Logging;
-using Bank.Managment.Broker.Storeage;
+using Bank.Managment.Broker.Storeage.RegisterStoreage;
 using Bank.Managment.Models;
 using static Bank.Managment.Broker.Logging.LoggingBroker;
-using static Bank.Managment.Broker.Storeage.StoreageBroker;
+using static Bank.Managment.Broker.Storeage.RegisterStoreage.StoreageBroker;
 using static Bank.Managment.Service.RegsterService;
 
 namespace Bank.Managment.Service

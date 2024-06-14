@@ -4,7 +4,7 @@
 
 using Bank.Managment.Models;
 
-namespace Bank.Managment.Broker.Storeage
+namespace Bank.Managment.Broker.Storeage.RegisterStoreage
 {
     internal class StoreageBroker
     {
@@ -60,6 +60,11 @@ namespace Bank.Managment.Broker.Storeage
             }
 
             public bool GetUsers(Users user) => throw new NotImplementedException();
+
+            public bool LogIn(Users user)
+            {
+                throw new NotImplementedException();
+            }
 
             private void EnsureFileExists()
             {
