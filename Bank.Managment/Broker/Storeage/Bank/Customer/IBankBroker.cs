@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+//----------------------------------------
+// Great Code Team (c) All rights reserved
+//----------------------------------------
 
-namespace Bank.Managment.Broker.Storeage.Bank.Customer
+using Bank.Management.Models;
+
+namespace Bank.Management.Console.Brokers.Storages.Bank
 {
     internal interface IBankBroker
     {
+        bool MakingDeposit(decimal accountNumberForBank, decimal balance);
+        decimal WithdrawMoney(decimal accountNumberForBank, decimal balance);
+        decimal GetBalance(decimal accountNumberForBank);
     }
 }

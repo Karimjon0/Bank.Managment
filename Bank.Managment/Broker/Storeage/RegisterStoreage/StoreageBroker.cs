@@ -61,6 +61,11 @@ namespace Bank.Managment.Broker.Storeage.RegisterStoreage
 
             public bool GetUsers(Users user) => throw new NotImplementedException();
 
+            public bool LogIn(Users user)
+            {
+                throw new NotImplementedException();
+            }
+
             private void EnsureFileExists()
             {
                 bool fileExists = File.Exists(filePath);

@@ -1,10 +1,11 @@
 ﻿
 //----------------------------------------
 // Great Code Team (c) All rights reserved
+//----------------------------------------
 
 using Bank.Managment.Broker.Logging;
 
-namespace Bank.Management.Console.Brokers.Loggings
+namespace Bank.Management.Brokers.Loggings
 {
     internal class LoggingBroker : ILoggingBroker
     {
