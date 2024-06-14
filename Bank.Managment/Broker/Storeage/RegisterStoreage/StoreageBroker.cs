@@ -4,7 +4,7 @@
 
 using Bank.Managment.Models;
 
-namespace Bank.Managment.Broker.Storeage
+namespace Bank.Managment.Broker.Storeage.RegisterStoreage
 {
     internal class StoreageBroker
     {

@@ -1,5 +1,5 @@
 ﻿using Bank.Managment.Broker.Logging;
-using Bank.Managment.Broker.Storeage;
+using Bank.Managment.Broker.Storeage.RegisterStoreage;
 using Bank.Managment.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Bank.Managment.Broker.Logging.LoggingBroker;
-using static Bank.Managment.Broker.Storeage.StoreageBroker;
+using static Bank.Managment.Broker.Storeage.RegisterStoreage.StoreageBroker;
 
 namespace Bank.Managment.Fountions
 {
