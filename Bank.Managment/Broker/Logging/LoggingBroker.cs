@@ -15,12 +15,14 @@ namespace Bank.Management.Brokers.Loggings
             System.Console.WriteLine(message);
             System.Console.ResetColor();
         }
+
         public void LogError(string userMessage)
         {
             System.Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine(userMessage);
             System.Console.ResetColor();
         }
+
         public void LogError(Exception exception)
         {
             System.Console.ForegroundColor = ConsoleColor.DarkRed;

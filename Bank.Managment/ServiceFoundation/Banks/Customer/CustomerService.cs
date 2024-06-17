@@ -7,7 +7,6 @@ using Bank.Management.Brokers.Loggings;
 using Bank.Management.Console.Brokers.Storages.BankStorage.Customers;
 using Bank.Managment.Broker.Logging;
 using Bank.Managment.Models;
-using Bank.Managment.ServiceFoundation.Banks.Customer;
 
 namespace Bank.Management.Console.Services.Foundations.Banks.Customers
 {

@@ -16,7 +16,7 @@ namespace Bank.Management.Console.Services.Foundations.Registrs
         private readonly ILoggingBroker loggingBroker;
         private readonly IRegistrBroker registrBroker;
 
-        public RegistrService()
+        public RegisterService()
         {
             this.loggingBroker = new LoggingBroker();
             this.registrBroker = new RegistrBroker();
