@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+//----------------------------------------
+// Great Code Team (c) All rights reserved
+//----------------------------------------
 
-namespace Bank.Managment.Broker.Storeage.BankStoreage.Customers
+using Bank.Managment.Models;
+
+namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
 {
     internal interface ICustomerBroker
     {
+        bool CreateAccountNumberForClient(Customer customer);
+        bool CloseAccountNumberForClient(decimal accountNumber);
+        bool TransferMoneyBetweenAccounts(decimal firstAccountNumber, decimal secondAccountNumber, decimal money);
     }
 }
