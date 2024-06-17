@@ -3,9 +3,9 @@
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-using Bank.Management.Models;
+using Bank.Managment.Models;
 
-namespace Bank.Management.Console.Brokers.Storages.Bank
+namespace Bank.Managment.Broker.Storeage.BankStoreage
 {
     internal interface IBankBroker
     {

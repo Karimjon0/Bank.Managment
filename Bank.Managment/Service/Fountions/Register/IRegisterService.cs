@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank.Managment.Fountions
+namespace Bank.Managment.Service.Fountions.Register
 {
     internal interface IRegisterService
     {
