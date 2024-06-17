@@ -2,11 +2,6 @@
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-
-//----------------------------------------
-// Great Code Team (c) All rights reserved
-//----------------------------------------
-
 namespace Bank.Managment.Broker.Storeage.BankStoreage
 {
     internal class BankBroker : IBankBroker
