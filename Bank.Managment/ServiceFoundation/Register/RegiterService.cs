@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using static Bank.Managment.Broker.Logging.LoggingBroker;
 using static Bank.Managment.Broker.Storeage.RegisterStoreage.RegisterBroker;
 
-namespace Bank.Managment.Service.Fountions.Register
+namespace Bank.Managment.ServiceFoundation.Register
 {
     internal class RegiterService
     {
