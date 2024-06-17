@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Bank.Managment.Broker.Logging.LoggingBroker;
-using static Bank.Managment.Broker.Storeage.RegisterStoreage.StoreageBroker;
+using static Bank.Managment.Broker.Storeage.RegisterStoreage.RegisterBroker;
 
 namespace Bank.Managment.Service.Fountions.Register
 {
@@ -16,12 +16,12 @@ namespace Bank.Managment.Service.Fountions.Register
         internal class RegistrService : IRegisterService
         {
             private readonly ILoggingBroker loggingBroker;
-            private readonly IStoreageBroker registrBroker;
+            private readonly IRegisterBroker registrBroker;
 
             public RegistrService()
             {
                 loggingBroker = new Broker.Logging.LoggingBroker.LoggingBroker();
-                registrBroker = new RegisterBroker();
+                registrBroker = new Broker.Storeage.RegisterStoreage.RegisterBroker.RegisterBroker();
             }
             public bool LogIn(Users user)
             {

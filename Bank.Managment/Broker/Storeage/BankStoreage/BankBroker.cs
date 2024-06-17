@@ -34,10 +34,8 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
                         return Convert.ToDecimal(depositeInfo[1]);
                     }
                 }
-
                 return 0;
             }
-
             return 0;
         }
 
@@ -69,7 +67,6 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
 
                 return true;
             }
-
             return false;
         }
 
@@ -97,7 +94,6 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
                     }
                 }
             }
-
             return 0;
         }
         private void EnsureFileExists()
@@ -109,6 +105,5 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
                 File.Create(filePath).Close();
             }
         }
-
     }
 }
