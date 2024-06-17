@@ -1,12 +1,13 @@
-﻿
+﻿//----------------------------------------
+// Great Code Team (c) All rights reserved
+//----------------------------------------
+
+
 //----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-using Bank.Managment.Broker.Storeage.Bank.Customer;
-using System.Linq;
-
-namespace Bank.Management.Console.Brokers.Storages.Bank
+namespace Bank.Managment.Broker.Storeage.BankStoreage
 {
     internal class BankBroker : IBankBroker
     {

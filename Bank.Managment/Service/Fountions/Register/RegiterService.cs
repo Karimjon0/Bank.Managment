@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using static Bank.Managment.Broker.Logging.LoggingBroker;
 using static Bank.Managment.Broker.Storeage.RegisterStoreage.StoreageBroker;
 
-namespace Bank.Managment.Fountions
+namespace Bank.Managment.Service.Fountions.Register
 {
     internal class RegiterService
     {
@@ -20,8 +20,8 @@ namespace Bank.Managment.Fountions
 
             public RegistrService()
             {
-                this.loggingBroker = new Broker.Logging.LoggingBroker.LoggingBroker();
-                this.registrBroker = new RegisterBroker();
+                loggingBroker = new Broker.Logging.LoggingBroker.LoggingBroker();
+                registrBroker = new RegisterBroker();
             }
             public bool LogIn(Users user)
             {
@@ -39,32 +39,32 @@ namespace Bank.Managment.Fountions
 
             private Users SignUpUserAndValidation(Users user)
             {
-                if (String.IsNullOrWhiteSpace(user.Name)
-                    || String.IsNullOrWhiteSpace(user.Password))
+                if (string.IsNullOrWhiteSpace(user.Name)
+                    || string.IsNullOrWhiteSpace(user.Password))
                 {
-                    this.loggingBroker.LogError("User information is incomplete");
+                    loggingBroker.LogError("User information is incomplete");
                     return new Users();
                 }
                 else
                 {
-                    Users userInformation = this.registrBroker.AddUser(user);
+                    Users userInformation = registrBroker.AddUser(user);
 
                     if (user.Password.Length >= 8)
                     {
                         if (userInformation is null)
                         {
-                            this.loggingBroker.LogError("This user base is available.");
+                            loggingBroker.LogError("This user base is available.");
                             return new Users();
                         }
                         else
                         {
-                            this.loggingBroker.LogInformation("User added successfully.");
+                            loggingBroker.LogInformation("User added successfully.");
                             return user;
                         }
                     }
                     else
                     {
-                        this.loggingBroker.LogError("Password does not contain 8 characters.");
+                        loggingBroker.LogError("Password does not contain 8 characters.");
                         return new Users();
                     }
                 }
@@ -72,38 +72,38 @@ namespace Bank.Managment.Fountions
 
             private Users InvalidSignUpUser()
             {
-                this.loggingBroker.LogError("User information is null or empty.");
+                loggingBroker.LogError("User information is null or empty.");
                 return new Users();
             }
 
             private bool LogInUserValidation(Users user)
             {
-                if (String.IsNullOrWhiteSpace(user.Name)
-                    || String.IsNullOrWhiteSpace(user.Password))
+                if (string.IsNullOrWhiteSpace(user.Name)
+                    || string.IsNullOrWhiteSpace(user.Password))
                 {
-                    this.loggingBroker.LogInformation("User data is not required.");
+                    loggingBroker.LogInformation("User data is not required.");
                     return false;
                 }
                 else
                 {
-                    bool isLogIn = this.registrBroker.LogIn(user);
+                    bool isLogIn = registrBroker.LogIn(user);
 
                     if (user.Password.Length >= 8)
                     {
                         if (isLogIn is true)
                         {
-                            this.loggingBroker.LogInformation("Successfully logged in.");
+                            loggingBroker.LogInformation("Successfully logged in.");
                             return true;
                         }
                         else
                         {
-                            this.loggingBroker.LogError("User does not exist in the database.");
+                            loggingBroker.LogError("User does not exist in the database.");
                             return false;
                         }
                     }
                     else
                     {
-                        this.loggingBroker.LogError("Password does not contain 8 characters.");
+                        loggingBroker.LogError("Password does not contain 8 characters.");
                         return false;
                     }
                 }
@@ -111,7 +111,7 @@ namespace Bank.Managment.Fountions
 
             private bool InvalidLogInUser()
             {
-                this.loggingBroker.LogError("User data is null.");
+                loggingBroker.LogError("User data is null.");
                 return false;
             }
         }
