@@ -8,7 +8,7 @@ using Bank.Managment.Service.Foundation.Banks;
 
 namespace Bank.Management.Console.Services.BankProcessing
 {
-    internal class BankProcessingsService : IBankProcessingsService
+    internal class BankProcessingsService : Services.BankProcessingsService.IBankProcessingsService
     {
         private readonly IRegistrService registrService;
         private readonly IBankService bankService;
@@ -59,9 +59,5 @@ namespace Bank.Management.Console.Services.BankProcessing
     {
         bool LogIn(Users user);
         Users SignUp(Users user);
-    }
-
-    internal interface IBankProcessingsService
-    {
     }
 }
