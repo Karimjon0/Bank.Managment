@@ -2,9 +2,14 @@
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
+
+//----------------------------------------
+// Great Code Team (c) All rights reserved
+//----------------------------------------
+
 using Bank.Managment.Models;
 
-namespace Bank.Managment.ServiceFoundation.Register
+namespace Bank.Managment.Service.Foundation.Register
 {
     internal interface IRegisterService
     {

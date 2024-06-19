@@ -8,7 +8,7 @@ using Bank.Management.Console.Brokers.Storages.BankStorage.Customers;
 using Bank.Managment.Broker.Logging;
 using Bank.Managment.Models;
 
-namespace Bank.Management.Console.Services.Foundations.Banks.Customers
+namespace Bank.Managment.Service.Foundation.Banks.Customer
 {
     internal class CustomerService : ICustomerService
     {
@@ -17,8 +17,8 @@ namespace Bank.Management.Console.Services.Foundations.Banks.Customers
 
         public CustomerService()
         {
-            this.loggingBroker = new LoggingBroker();
-            this.customerBroker = new CustomerBroker();
+            loggingBroker = new LoggingBroker();
+            customerBroker = new CustomerBroker();
         }
 
         public bool CreateClient(Customer customer)
@@ -56,20 +56,20 @@ namespace Bank.Management.Console.Services.Foundations.Banks.Customers
             decimal secondAccountNumber,
             decimal money)
         {
-            bool isTrnasferMoney = this.customerBroker.TransferMoneyBetweenAccounts(
+            bool isTrnasferMoney = customerBroker.TransferMoneyBetweenAccounts(
                 firstAccountNumber,
                 secondAccountNumber,
                 money);
             if (isTrnasferMoney is false)
             {
-                this.loggingBroker
+                loggingBroker
                     .LogError(
                     "An error occurred when transferring money between two accounts.");
 
                 return isTrnasferMoney;
             }
 
-            this.loggingBroker
+            loggingBroker
                     .LogInformation(
                     "Money has been successfully transferred between two accounts.");
             return isTrnasferMoney;
@@ -77,7 +77,7 @@ namespace Bank.Management.Console.Services.Foundations.Banks.Customers
 
         private bool InvalidTransferMoneyBetweenClients()
         {
-            this.loggingBroker
+            loggingBroker
                 .LogError("There is an error when entering account number or currency information.");
 
             return false;
@@ -86,55 +86,55 @@ namespace Bank.Management.Console.Services.Foundations.Banks.Customers
         private bool ValidationAndDeleteClient(decimal accountNumber)
         {
             bool isClosesForClient =
-                this.customerBroker.CloseAccountNumberForClient(accountNumber);
+                customerBroker.CloseAccountNumberForClient(accountNumber);
 
             if (isClosesForClient is true)
             {
-                this.loggingBroker.LogInformation("Client account closed successfully.");
+                loggingBroker.LogInformation("Client account closed successfully.");
                 return isClosesForClient;
             }
 
-            this.loggingBroker.LogError("The client account does not exist in the database.");
+            loggingBroker.LogError("The client account does not exist in the database.");
             return isClosesForClient;
         }
 
         private bool InvalidDeleteClient()
         {
-            this.loggingBroker.LogError("Account number information is incomplete.");
+            loggingBroker.LogError("Account number information is incomplete.");
             return false;
         }
 
         private bool ValidationAndCreateClient(Customer customer)
         {
-            if (!(String.IsNullOrWhiteSpace(customer.Name))
-                && (customer.AccountNumber.ToString().Length == 16
-                && customer.AccountNumber > 0))
+            if (!string.IsNullOrWhiteSpace(customer.Name)
+                && customer.AccountNumber.ToString().Length == 16
+                && customer.AccountNumber > 0)
             {
                 bool isCreateClient =
-                    this.customerBroker.CreateAccountNumberForClient(customer);
+                    customerBroker.CreateAccountNumberForClient(customer);
 
                 if (isCreateClient is true)
                 {
 
-                    this.loggingBroker
+                    loggingBroker
                         .LogInformation("The account for the client has been successfully created.");
 
                     return isCreateClient;
                 }
                 else
                 {
-                    this.loggingBroker.LogInformation("This account has been created.");
+                    loggingBroker.LogInformation("This account has been created.");
                     return isCreateClient;
                 }
             }
 
-            this.loggingBroker.LogError("The client information is incomplete.");
+            loggingBroker.LogError("The client information is incomplete.");
             return false;
         }
 
         private bool InvalidCreateClient()
         {
-            this.loggingBroker.LogError("Client has no information.");
+            loggingBroker.LogError("Client has no information.");
             return false;
         }
     }

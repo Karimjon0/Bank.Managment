@@ -6,7 +6,7 @@ using Bank.Management.Brokers.Loggings;
 using Bank.Managment.Broker.Logging;
 using Bank.Managment.Broker.Storeage.BankStoreage;
 
-namespace Bank.Managment.ServiceFoundation.Banks
+namespace Bank.Managment.Service.Foundation.Banks
 {
     internal class BankService : IBankService
     {

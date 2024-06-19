@@ -2,7 +2,7 @@
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-namespace Bank.Managment.ServiceFoundation.Banks
+namespace Bank.Managment.Service.Foundation.Banks
 {
     internal interface IBankService
     {
