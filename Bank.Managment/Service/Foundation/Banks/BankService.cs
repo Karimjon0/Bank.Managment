@@ -1,27 +1,30 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
 using Bank.Management.Brokers.Loggings;
 using Bank.Managment.Broker.Logging;
-using Bank.Managment.Broker.Storeage.BankStoreage;
+using Bank.Managment.Service.Foundation.Banks;
 
-namespace Bank.Managment.Service.Foundation.Banks
+namespace Bank.Management.Console.Services.Foundations.Banks
 {
     internal class BankService : IBankService
     {
-        private readonly IBankBroker bankBroker;
+        private readonly IBankStoreageBroker bankBroker;
         private readonly ILoggingBroker loggingBroker;
+
+        public IBankStoreageBroker BankBroker => bankBroker;
 
         public BankService()
         {
-            bankBroker = new BankBroker();
-            loggingBroker = new LoggingBroker();
+            this.bankBroker = new BankStoreageBroker();
+            this.loggingBroker = new LoggingBroker();
         }
 
         public bool AddDeposit(decimal accountNumberForBank, decimal balance)
         {
-            return accountNumberForBank is 0 || balance is 0
+            return (accountNumberForBank is 0 || balance is 0)
                 ? InvalidAddDeposit()
                 : ValidationAndAddDeposite(accountNumberForBank, balance);
         }
@@ -35,7 +38,7 @@ namespace Bank.Managment.Service.Foundation.Banks
 
         public decimal GetMoney(decimal accountNumberForBank, decimal balance)
         {
-            return accountNumberForBank is 0 || balance is 0
+            return (accountNumberForBank is 0 || balance is 0)
                     ? InvalidGetMoney()
                     : ValidationAndGetMoney(accountNumberForBank, balance);
         }
@@ -43,21 +46,21 @@ namespace Bank.Managment.Service.Foundation.Banks
         private decimal ValidationAndGetMoney(decimal accountNumberForBank, decimal balance)
         {
             decimal resultWithdrawMoney =
-                bankBroker.WithdrawMoney(accountNumberForBank, balance);
+                this.BankBroker.WithdrawMoney(accountNumberForBank, balance);
 
             if (resultWithdrawMoney is 0)
             {
-                loggingBroker.LogError("Could not get balance.");
+                this.loggingBroker.LogError("Could not get balance.");
                 return resultWithdrawMoney;
             }
 
-            loggingBroker.LogInformation("Balance received successfully.");
+            this.loggingBroker.LogInformation("Balance received successfully.");
             return resultWithdrawMoney;
         }
 
         private decimal InvalidGetMoney()
         {
-            loggingBroker.LogError("The data entered is incomplete.");
+            this.loggingBroker.LogError("The data entered is incomplete.");
             return 0;
         }
 
@@ -65,21 +68,21 @@ namespace Bank.Managment.Service.Foundation.Banks
                 decimal accountNumberForBank)
         {
             decimal resultGetBalance =
-                bankBroker.GetBalance(accountNumberForBank);
+                this.BankBroker.GetBalance(accountNumberForBank);
 
             if (resultGetBalance == 0)
             {
-                loggingBroker.LogError("Account number not found.");
+                this.loggingBroker.LogError("Account number not found.");
                 return resultGetBalance;
             }
 
-            loggingBroker.LogInformation("Balance received successfully");
+            this.loggingBroker.LogInformation("Balance received successfully");
             return resultGetBalance;
         }
 
         private decimal InvalidGetBalanceInBank()
         {
-            loggingBroker.LogError("Account number is incomplete.");
+            this.loggingBroker.LogError("Account number is incomplete.");
             return 0;
         }
         private bool ValidationAndAddDeposite(
@@ -87,22 +90,47 @@ namespace Bank.Managment.Service.Foundation.Banks
             decimal balance)
         {
             bool resultMakingDeposite =
-                bankBroker.MakingDeposit(accountNumberForBank, balance);
+                this.BankBroker.MakingDeposit(accountNumberForBank, balance);
             if (resultMakingDeposite is true)
             {
-                loggingBroker.LogInformation("Deposite added to bank account.");
+                this.loggingBroker.LogInformation("Deposite added to bank account.");
                 return resultMakingDeposite;
             }
 
-            loggingBroker.LogError("Deposite not added to bank account.");
+            this.loggingBroker.LogError("Deposite not added to bank account.");
             return resultMakingDeposite;
         }
 
         private bool InvalidAddDeposit()
         {
-            loggingBroker.
+            this.loggingBroker.
                 LogError("The parameters required for Deposite are incomplete.");
             return false;
         }
+    }
+
+    internal class BankStoreageBroker : IBankStoreageBroker
+    {
+        public decimal GetBalance(decimal accountNumberForBank)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MakingDeposit(decimal accountNumberForBank, decimal balance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal WithdrawMoney(decimal accountNumberForBank, decimal balance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal interface IBankStoreageBroker
+    {
+        decimal GetBalance(decimal accountNumberForBank);
+        bool MakingDeposit(decimal accountNumberForBank, decimal balance);
+        decimal WithdrawMoney(decimal accountNumberForBank, decimal balance);
     }
 }
