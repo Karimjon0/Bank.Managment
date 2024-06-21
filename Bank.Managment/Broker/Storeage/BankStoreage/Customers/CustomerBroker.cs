@@ -1,4 +1,5 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
@@ -8,9 +9,9 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
 {
     internal class CustomerBroker : ICustomerBroker
     {
-
         private readonly string filePath = "../../../Assets/CustomerFileDB.txt";
         private bool isDelete;
+
         public CustomerBroker()
         {
             isDelete = false;
@@ -22,12 +23,12 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
             string[] clientAllInfo = File.ReadAllLines(filePath);
             File.WriteAllText(filePath, string.Empty);
 
-            for (int itaration = 0; itaration < clientAllInfo.Length; itaration++)
+            for (int itarator = 0; itarator < clientAllInfo.Length; itarator++)
             {
-                string clientInfo = clientAllInfo[itaration];
+                string clientInfo = clientAllInfo[itarator];
                 string[] client = clientInfo.Split('*');
 
-                if (client[1].Contains(accountNumber.ToString()) is true)
+                if (client[1].Contains(accountNumber.ToString()))
                 {
                     isDelete = true;
                 }
@@ -44,9 +45,9 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         {
             string[] clientAllInfo = File.ReadAllLines(filePath);
 
-            for (int itaration = 0; itaration < clientAllInfo.Length; itaration++)
+            for (int itarator = 0; itarator < clientAllInfo.Length; itarator++)
             {
-                string clientInfo = clientAllInfo[itaration];
+                string clientInfo = clientAllInfo[itarator];
                 string[] client = clientInfo.Split('*');
 
                 if (client[0].Contains(customer.Name)
@@ -64,7 +65,6 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         public bool TransferMoneyBetweenAccounts(decimal firstAccountNumber, decimal secondAccountNumber, decimal money)
         {
             string[] clientInfo = File.ReadAllLines(filePath);
-            File.WriteAllText(filePath, string.Empty);
 
             if (IsAccountNumberCheck(firstAccountNumber)
                 && IsAccountNumberCheck(secondAccountNumber))
@@ -74,21 +74,20 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
 
                 if (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) >= money)
                 {
-
+                    File.WriteAllText(filePath, string.Empty);
                     clientInfo[firstIndex].Split('*')[2] =
                         (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) - money).ToString();
                     clientInfo[secondIndex].Split('*')[2] =
-                        (Convert.ToDecimal(clientInfo[secondIndex].Split('*')[2]) + money).ToString();
+                             (Convert.ToDecimal(clientInfo[secondIndex].Split('*')[2]) + money).ToString();
 
-                    for (int itaration = 0; itaration < clientInfo.Length; itaration++)
+                    for (int itarator = 0; itarator < clientInfo.Length; itarator++)
                     {
-                        string clientLineInfo = clientInfo[itaration];
+                        string clientLineInfo = clientInfo[itarator];
                         File.AppendAllText(filePath, clientLineInfo + "\n");
                     }
 
                     return true;
                 }
-
             }
 
             return false;
@@ -98,10 +97,11 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         {
             string[] clientAllInfo = File.ReadAllLines(filePath);
 
-            for (int itaration = 0; itaration < clientAllInfo.Length; itaration++)
+            for (int itarator = 0; itarator < clientAllInfo.Length; itarator++)
             {
-                string clietInfo = clientAllInfo[itaration];
-                string[] client = clietInfo.Split('*');
+                string clientInfo = clientAllInfo[itarator];
+                string[] client = clientInfo.Split('*');
+
                 if (client[1].Contains(accountNumber.ToString()))
                 {
                     return true;
@@ -115,13 +115,14 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         {
             string[] clientAllInfo = File.ReadAllLines(filePath);
 
-            for (int itaration = 0; itaration < clientAllInfo.Length; itaration++)
+            for (int itarator = 0; itarator < clientAllInfo.Length; itarator++)
             {
-                string clietInfo = clientAllInfo[itaration];
-                string[] client = clietInfo.Split('*');
+                string clientInfo = clientAllInfo[itarator];
+                string[] client = clientInfo.Split('*');
+
                 if (client[1].Contains(accountNumber.ToString()))
                 {
-                    return itaration;
+                    return itarator;
                 }
             }
 

@@ -95,7 +95,7 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
         {
             bool isFileThere = File.Exists(filePath);
 
-            if (isFileThere is true)
+            if (isFileThere is false)
             {
                 File.Create(filePath).Close();
             }

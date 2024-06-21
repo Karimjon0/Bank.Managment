@@ -1,27 +1,39 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
 using Bank.Managment.Models;
 using Bank.Managment.Service.Foundation.Banks.Customer;
 using Bank.Managment.Service.Foundation.Banks;
+using Bank.Management.Console.Services.BankProcessingsService;
+using Bank.Managment.Service.Foundation.Register;
+using Bank.Management.Console.Services.Foundations.Customers;
 
-namespace Bank.Management.Console.Services.BankProcessing
+namespace Bank.Management.Console.Services.BankProcessings
 {
-    internal class BankProcessingsService : Services.BankProcessingsService.IBankProcessingsService
+    internal class BankProcessingService : IBankProcessingsService
     {
-        private readonly IRegistrService registrService;
+        private readonly IRegisterService registrService;
         private readonly IBankService bankService;
         private readonly ICustomerService customerService;
+        private ICustomerService customerService1;
 
-        public BankProcessingsService(
-            IRegistrService registrService,
+        public BankProcessingService(
+            IRegisterService registrService,
             IBankService bankService,
             ICustomerService customerService)
         {
             this.registrService = registrService;
             this.bankService = bankService;
             this.customerService = customerService;
+        }
+
+        public BankProcessingService(IRegisterService registrService, IBankService bankService, ICustomerService customerService1)
+        {
+            this.registrService = registrService;
+            this.bankService = bankService;
+            this.customerService1 = customerService1;
         }
 
         public bool DeleteForClient(decimal accountNumber) =>
@@ -35,6 +47,8 @@ namespace Bank.Management.Console.Services.BankProcessing
 
         public bool LogInUser(Users user) =>
             this.registrService.LogIn(user);
+
+        public bool LogInUsers(Users user) => throw new NotImplementedException();
 
         public bool PostDeposit(decimal accountNumberForBank, decimal balance) =>
         this.bankService.AddDeposit(accountNumberForBank, balance);
@@ -53,11 +67,5 @@ namespace Bank.Management.Console.Services.BankProcessing
                             firstAccountNumber,
                             secondAccountNumber,
                             money);
-    }
-
-    public interface IRegistrService
-    {
-        bool LogIn(Users user);
-        Users SignUp(Users user);
     }
 }
