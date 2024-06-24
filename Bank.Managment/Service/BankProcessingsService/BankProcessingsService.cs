@@ -4,7 +4,6 @@
 //----------------------------------------
 
 using Bank.Managment.Models;
-using Bank.Managment.Service.Foundation.Banks.Customer;
 using Bank.Managment.Service.Foundation.Banks;
 using Bank.Management.Console.Services.BankProcessingsService;
 using Bank.Managment.Service.Foundation.Register;
@@ -67,5 +66,15 @@ namespace Bank.Management.Console.Services.BankProcessings
                             firstAccountNumber,
                             secondAccountNumber,
                             money);
+
+        internal void GetAllClient()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal decimal GetBalanceClient(decimal accountNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
