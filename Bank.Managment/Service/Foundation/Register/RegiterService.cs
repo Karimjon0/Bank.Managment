@@ -108,7 +108,7 @@ namespace Bank.Managment.Service.Foundation.Register
 
         private bool InvalidLogInUser()
         {
-            loggingBroker.LogError("User data is null.");
+            this.loggingBroker.LogError("User data is null.");
             return false;
         }
     }
