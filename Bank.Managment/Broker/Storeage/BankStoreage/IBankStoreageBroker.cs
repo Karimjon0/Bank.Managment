@@ -7,7 +7,7 @@ using Bank.Managment.Models;
 
 namespace Bank.Managment.Broker.Storeage.BankStoreage
 {
-    internal interface IBankBroker
+    internal interface IBankStoreageBroker
     {
         bool MakingDeposit(decimal accountNumberForBank, decimal balance);
         decimal WithdrawMoney(decimal accountNumberForBank, decimal balance);

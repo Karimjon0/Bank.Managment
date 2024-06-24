@@ -1,8 +1,9 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-namespace Bank.Managment.Service.Foundation.Banks
+namespace Bank.Management.Console.Services.Foundations.Banks
 {
     internal interface IBankService
     {

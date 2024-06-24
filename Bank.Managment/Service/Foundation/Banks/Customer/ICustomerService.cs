@@ -1,5 +1,4 @@
-﻿
-//----------------------------------------
+﻿//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
@@ -16,5 +15,8 @@ namespace Bank.Management.Console.Services.Foundations.Customers
             decimal firstAccountNumber,
             decimal secondAccountNumber,
             decimal money);
+
+        string GetAllCustomer();
+        decimal GetBalanceInClient(decimal accountNumber);
     }
 }

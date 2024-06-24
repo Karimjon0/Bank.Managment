@@ -11,5 +11,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         bool CreateAccountNumberForClient(Customer customer);
         bool CloseAccountNumberForClient(decimal accountNumber);
         bool TransferMoneyBetweenAccounts(decimal firstAccountNumber, decimal secondAccountNumber, decimal money);
+        string ReadAllCustormer();
+        decimal GetBalance(decimal accountNumber);
     }
 }

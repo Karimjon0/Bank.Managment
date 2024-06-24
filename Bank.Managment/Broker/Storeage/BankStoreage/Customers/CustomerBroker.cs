@@ -1,5 +1,4 @@
-﻿
-//----------------------------------------
+﻿//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
@@ -41,6 +40,35 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
             return isDelete;
         }
 
+        public decimal GetBalance(decimal accountNumber)
+        {
+            if (accountNumber.ToString().Length >= 16)
+            {
+                string[] accountLines = File.ReadAllLines(filePath);
+
+                for (int itarator = 0; itarator < accountLines.Length; itarator++)
+                {
+                    string accountLine = accountLines[itarator];
+                    string[] clientInfo = accountLine.Split('*');
+
+                    if (clientInfo[1].Contains(accountNumber.ToString()))
+                    {
+                        return Convert.ToDecimal(clientInfo[2]);
+                    }
+                }
+
+                return 0;
+            }
+
+            return 0;
+        }
+
+        public string ReadAllCustormer()
+        {
+            string clientInfo = File.ReadAllText(filePath);
+            return clientInfo;
+        }
+
         public bool CreateAccountNumberForClient(Customer customer)
         {
             string[] clientAllInfo = File.ReadAllLines(filePath);
@@ -72,16 +100,31 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
                 int firstIndex = this.GetIndex(firstAccountNumber);
                 int secondIndex = this.GetIndex(secondAccountNumber);
 
-                if (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) >= money)
+                string[] firstClientInfoLine = clientInfo[firstIndex].Split('*');
+                string[] secondClinetInfoLine = clientInfo[secondIndex].Split('*');
+
+                if (Convert.ToDecimal(firstClientInfoLine[2]) >= money)
                 {
                     File.WriteAllText(filePath, string.Empty);
-                    clientInfo[firstIndex].Split('*')[2] =
-                        (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) - money).ToString();
-                    clientInfo[secondIndex].Split('*')[2] =
-                             (Convert.ToDecimal(clientInfo[secondIndex].Split('*')[2]) + money).ToString();
+
+                    decimal firstAccount = Convert.ToDecimal(firstClientInfoLine[2]);
+                    firstAccount -= money;
+                    firstClientInfoLine[2] = firstAccount.ToString();
+
+                    decimal secondAccount = Convert.ToDecimal(secondClinetInfoLine[2]);
+                    secondAccount += money;
+                    secondClinetInfoLine[2] = secondAccount.ToString();
 
                     for (int itarator = 0; itarator < clientInfo.Length; itarator++)
                     {
+                        if (itarator == firstIndex)
+                        {
+                            clientInfo[itarator] = $"{firstClientInfoLine[0]}*{firstClientInfoLine[1]}*{firstClientInfoLine[2]}";
+                        }
+                        else if (itarator == secondIndex)
+                        {
+                            clientInfo[itarator] = $"{secondClinetInfoLine[0]}*{secondClinetInfoLine[1]}*{secondClinetInfoLine[2]}";
+                        }
                         string clientLineInfo = clientInfo[itarator];
                         File.AppendAllText(filePath, clientLineInfo + "\n");
                     }
