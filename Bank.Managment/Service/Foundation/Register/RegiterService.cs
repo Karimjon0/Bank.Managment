@@ -1,67 +1,70 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
 using Bank.Management.Brokers.Loggings;
+using Bank.Management.Console.Brokers.Storages;
 using Bank.Management.Console.Brokers.Storages.RegistrsStorage;
 using Bank.Managment.Broker.Logging;
 using Bank.Managment.Models;
-using System.Runtime.InteropServices;
+using Bank.Managment.Service.Foundation.Register;
 
-namespace Bank.Managment.Service.Foundation.Register
+namespace Bank.Management.Console.Services.Foundations.Registrs
 {
-    internal class RegisterService : IRegisterService
+    internal class RegistrService : IRegisterService
     {
         private readonly ILoggingBroker loggingBroker;
         private readonly IRegistrBroker registrBroker;
 
-        public RegisterService()
+        public RegistrService()
         {
-            loggingBroker = new LoggingBroker();
-            registrBroker = new RegistrBroker();
+            this.loggingBroker = new LoggingBroker();
+            this.registrBroker = new RegistrBroker();
         }
+
         public bool LogIn(Users user)
         {
             return user is null
                 ? InvalidLogInUser()
-                : LogInUserValidation(user);
+                : ValidationAndLogInUser(user);
         }
 
         public Users SignUp(Users user)
         {
             return user is null
-            ? InvalidSignUpUser()
-                : SignUpUserAndValidation(user);
+                ? InvalidSignUpUser()
+                : ValidationAndSignUpUser(user);
         }
 
-        private Users SignUpUserAndValidation(Users user)
+        private Users ValidationAndSignUpUser(Users user)
         {
-            if (string.IsNullOrWhiteSpace(user.Name)
-                || string.IsNullOrWhiteSpace(user.Password))
+            if (String.IsNullOrWhiteSpace(user.Name)
+                || String.IsNullOrWhiteSpace(user.Password))
             {
-                loggingBroker.LogError("User information is incomplete");
+                this.loggingBroker.LogError("User information is incomplete.");
                 return new Users();
             }
             else
             {
-                Users userInformation = registrBroker.AddUser(user);
+                Users userInformation = this.registrBroker.AddUser(user);
 
                 if (user.Password.Length >= 8)
                 {
-                    if (userInformation is null)
+                    if (userInformation.Name is null)
                     {
-                        loggingBroker.LogError("This user base is available.");
+                        this.loggingBroker.LogError("This user is available in the database.");
                         return new Users();
                     }
                     else
                     {
-                        loggingBroker.LogInformation("User added successfully.");
+                        this.loggingBroker.LogInformation("User added successfully.");
                         return user;
                     }
                 }
                 else
                 {
-                    loggingBroker.LogError("Password does not contain 8 characters.");
+                    this.loggingBroker.LogError("Password does not contain 8 characters.");
                     return new Users();
                 }
             }
@@ -69,38 +72,38 @@ namespace Bank.Managment.Service.Foundation.Register
 
         private Users InvalidSignUpUser()
         {
-            loggingBroker.LogError("User information is null or empty.");
+            this.loggingBroker.LogError("User information is null or empty.");
             return new Users();
         }
 
-        private bool LogInUserValidation(Users user)
+        private bool ValidationAndLogInUser(Users user)
         {
-            if (string.IsNullOrWhiteSpace(user.Name)
-                || string.IsNullOrWhiteSpace(user.Password))
+            if (String.IsNullOrWhiteSpace(user.Name)
+                || String.IsNullOrWhiteSpace(user.Password))
             {
-                loggingBroker.LogInformation("User data is not required.");
+                this.loggingBroker.LogInformation("User data is not required.");
                 return false;
             }
             else
             {
-                bool isLogIn = registrBroker.LogIn(user);
+                bool IsLogIn = this.registrBroker.CheckoutUser(user);
 
                 if (user.Password.Length >= 8)
                 {
-                    if (isLogIn is true)
+                    if (IsLogIn is true)
                     {
-                        loggingBroker.LogInformation("Successfully logged in.");
+                        this.loggingBroker.LogInformation("Successfully logged in.");
                         return true;
                     }
                     else
                     {
-                        loggingBroker.LogError("User does not exist in the database.");
+                        this.loggingBroker.LogError("User does not exist in the database.");
                         return false;
                     }
                 }
                 else
                 {
-                    loggingBroker.LogError("Password does not contain 8 characters.");
+                    this.loggingBroker.LogError("Password does not contain 8 characters.");
                     return false;
                 }
             }

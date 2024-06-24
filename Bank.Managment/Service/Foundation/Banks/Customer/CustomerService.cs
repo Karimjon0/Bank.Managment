@@ -1,5 +1,4 @@
-﻿
-//----------------------------------------
+﻿//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
@@ -27,6 +26,29 @@ namespace Bank_management.Services.Foundation.Banks.Customers
             return customer is null
                 ? InvalidCreateClient()
                 : ValidationAndCreateClient(customer);
+        }
+
+        public decimal GetBalanceInClient(decimal accountNumber)
+        {
+            return accountNumber is 0
+                ? InvalidGetBalanceInClient()
+                : ValidationAndGetBalanceInClient(accountNumber);
+        }
+
+        public string GetAllCustomer()
+        {
+            var clientInfo = this.customerBroker.ReadAllCustormer();
+
+            if (clientInfo is not null)
+            {
+                this.loggingBroker.LogInfo(clientInfo.ToString());
+            }
+            else
+            {
+                this.loggingBroker.LogError("The database is full of information.");
+            }
+
+            return clientInfo;
         }
 
         public bool DeleteClient(decimal accountNumber)
@@ -124,7 +146,7 @@ namespace Bank_management.Services.Foundation.Banks.Customers
                 }
                 else
                 {
-                    this.loggingBroker.LogInformation("This account has been created.");
+                    this.loggingBroker.LogError("This account has been created.");
                     return isCreateClient;
                 }
             }
@@ -137,6 +159,27 @@ namespace Bank_management.Services.Foundation.Banks.Customers
         {
             this.loggingBroker.LogError("Client has no information.");
             return false;
+        }
+
+        private decimal ValidationAndGetBalanceInClient(decimal accountNumber)
+        {
+            decimal resultGetBalance =
+                this.customerBroker.GetBalance(accountNumber);
+
+            if (resultGetBalance == 0)
+            {
+                this.loggingBroker.LogError("Account number not found.");
+                return resultGetBalance;
+            }
+
+            this.loggingBroker.LogInformation("The amount of money in the customer's balance was found successfully.");
+            return resultGetBalance;
+        }
+
+        private decimal InvalidGetBalanceInClient()
+        {
+            this.loggingBroker.LogError("This accountNumber was not found in the database.");
+            return 0;
         }
     }
 }

@@ -4,20 +4,19 @@
 
 using Bank.Managment.Models;
 
-namespace Bank.Management.Console.Services.BankProcessingsService
+namespace Bank.Management.Console.Services.BankProcessings
 {
-    internal interface IBankProcessingsService
+    internal interface IBankProcessingService
     {
-        public bool DeleteForClient(decimal accountNumber);
-        public decimal GetBalance(decimal accountNumberForBank);
-        public decimal GetMoney(decimal accountNumberForBank, decimal balance);
-        public bool LogInUser(Users user);
-        public bool PostDeposit(decimal accountNumberForBank, decimal balance);
-        public bool PostForClient(Customer customer);
-        public Users PostUser(Users user);
-        public bool TransferMoneyBetweenAccountsForClient(
-                decimal firstAccountNumber,
-                decimal secondAccountNumber,
-                decimal money);
+        string GetAllClient();
+        decimal GetBalanceClient(decimal accountNumber);
+        Users PostUser(Users user);
+        bool LogInUser(Users user);
+        bool PostDeposit(decimal accountNumberForBank, decimal balance);
+        decimal GetMoney(decimal accountNumberForBank, decimal balance);
+        decimal GetBalance(decimal accountNumberForBank);
+        bool PostForClient(Customer customer);
+        bool DeleteForClient(decimal accountNumber);
+        bool TransferMoneyBetweenAccountsForClient(decimal firstAccountNumber, decimal secondAccountNumber, decimal money);
     }
 }

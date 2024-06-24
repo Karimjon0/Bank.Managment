@@ -11,11 +11,10 @@ namespace Bank.Management.Brokers.Loggings
     {
         public void LogInformation(string message)
         {
-            System.Console.ForegroundColor = ConsoleColor.DarkGreen;
+            System.Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine(message);
             System.Console.ResetColor();
         }
-
         public void LogError(string userMessage)
         {
             System.Console.ForegroundColor = ConsoleColor.Red;
@@ -29,5 +28,13 @@ namespace Bank.Management.Brokers.Loggings
             System.Console.WriteLine(exception.Message);
             System.Console.ResetColor();
         }
+
+        public void LogInfo(string message)
+        {
+            System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+            System.Console.WriteLine(message);
+            System.Console.ResetColor();
+        }
     }
 }
+

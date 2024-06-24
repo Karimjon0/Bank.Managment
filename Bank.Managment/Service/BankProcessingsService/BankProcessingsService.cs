@@ -1,22 +1,21 @@
-﻿
-//----------------------------------------
+﻿//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-using Bank.Managment.Models;
-using Bank.Managment.Service.Foundation.Banks;
-using Bank.Management.Console.Services.BankProcessingsService;
-using Bank.Managment.Service.Foundation.Register;
+using Bank.Management.Console.Services.Foundations.Banks;
 using Bank.Management.Console.Services.Foundations.Customers;
+using Bank.Managment.Models;
+using Bank.Managment.Service.Foundation;
+using Bank.Managment.Service.Foundation.Register;
 
 namespace Bank.Management.Console.Services.BankProcessings
 {
-    internal class BankProcessingService : IBankProcessingsService
+    internal class BankProcessingService : IBankProcessingService
     {
         private readonly IRegisterService registrService;
         private readonly IBankService bankService;
         private readonly ICustomerService customerService;
-        private ICustomerService customerService1;
+        private IBankService bankService1;
 
         public BankProcessingService(
             IRegisterService registrService,
@@ -28,18 +27,16 @@ namespace Bank.Management.Console.Services.BankProcessings
             this.customerService = customerService;
         }
 
-        public BankProcessingService(IRegisterService registrService, IBankService bankService, ICustomerService customerService1)
-        {
-            this.registrService = registrService;
-            this.bankService = bankService;
-            this.customerService1 = customerService1;
-        }
-
         public bool DeleteForClient(decimal accountNumber) =>
             this.customerService.DeleteClient(accountNumber);
 
+        public string GetAllClient() => this.customerService.GetAllCustomer();
+
         public decimal GetBalance(decimal accountNumberForBank) =>
             this.bankService.GetBalanceInBank(accountNumberForBank);
+
+        public decimal GetBalanceClient(decimal accountNumber) =>
+            this.customerService.GetBalanceInClient(accountNumber);
 
         public decimal GetMoney(decimal accountNumberForBank, decimal balance) =>
             this.bankService.GetMoney(accountNumberForBank, balance);
@@ -47,13 +44,11 @@ namespace Bank.Management.Console.Services.BankProcessings
         public bool LogInUser(Users user) =>
             this.registrService.LogIn(user);
 
-        public bool LogInUsers(Users user) => throw new NotImplementedException();
-
         public bool PostDeposit(decimal accountNumberForBank, decimal balance) =>
-        this.bankService.AddDeposit(accountNumberForBank, balance);
+            this.bankService.AddDeposit(accountNumberForBank, balance);
 
         public bool PostForClient(Customer customer) =>
-            this.customerService.CreateClient(customer);
+        this.customerService.CreateClient(customer);
 
         public Users PostUser(Users user) =>
             this.registrService.SignUp(user);
@@ -66,15 +61,5 @@ namespace Bank.Management.Console.Services.BankProcessings
                             firstAccountNumber,
                             secondAccountNumber,
                             money);
-
-        internal void GetAllClient()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal decimal GetBalanceClient(decimal accountNumber)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

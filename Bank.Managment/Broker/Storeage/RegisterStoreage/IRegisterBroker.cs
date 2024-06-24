@@ -9,6 +9,6 @@ namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
     internal interface IRegistrBroker
     {
         Users AddUser(Users user);
-        bool LogIn(Users user);
+        bool CheckoutUser(Users user);
     }
 }

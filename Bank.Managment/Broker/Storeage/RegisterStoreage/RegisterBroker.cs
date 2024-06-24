@@ -2,13 +2,14 @@
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
+using Bank.Management.Console.Brokers.Storages.RegistrsStorage;
 using Bank.Managment.Models;
 
-namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
+namespace Bank.Management.Console.Brokers.Storages
 {
     internal class RegistrBroker : IRegistrBroker
     {
-        private readonly string filePath = "../../../Assets/RegistrFileDb.txt";
+        private readonly string filePath = "../../../Assets/RegistrFileDB.txt";
 
         public RegistrBroker()
         {
@@ -18,8 +19,7 @@ namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
         public Users AddUser(Users user)
         {
             string[] userLines = File.ReadAllLines(filePath);
-
-            for (int itaration = 0; itaration > userLines.Length; itaration++)
+            for (int itaration = 0; itaration < userLines.Length; itaration++)
             {
                 string userLine = userLines[itaration];
                 string[] userInfo = userLine.Split('*');
@@ -36,7 +36,12 @@ namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
             return user;
         }
 
-        public bool LogIn(Users user)
+        public Users AddUsers(Users user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckoutUser(Users user)
         {
             string[] userLines = File.ReadAllLines(filePath);
 
@@ -46,7 +51,7 @@ namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
                 string[] userInfo = userLine.Split('*');
 
                 if (userInfo[0].Contains(user.Name)
-                    && userInfo[1].Contains(user.Password))
+                   && userInfo[1].Contains(user.Password))
                 {
                     return true;
                 }
@@ -58,7 +63,6 @@ namespace Bank.Management.Console.Brokers.Storages.RegistrsStorage
         private void EnsureFileExists()
         {
             bool fileExists = File.Exists(filePath);
-
             if (fileExists is false)
             {
                 File.Create(filePath).Close();

@@ -5,8 +5,8 @@
 using Bank.Management.Console.Services.BankProcessings;
 using Bank.Management.Console.Services.Foundations.Banks;
 using Bank.Management.Console.Services.Foundations.Customers;
+using Bank.Management.Console.Services.Foundations.Registrs;
 using Bank.Managment.Models;
-using Bank.Managment.Service.Foundation.Banks;
 using Bank.Managment.Service.Foundation.Register;
 using Bank_management.Services.Foundation.Banks.Customers;
 
@@ -150,12 +150,12 @@ do
 
 static BankProcessingService BankManagmentProject()
 {
-    IRegisterService registrService = new RegisterService();
+    IRegisterService registrService = new RegistrService();
     IBankService bankService = new BankService();
     ICustomerService customerService = new CustomerService();
 
     BankProcessingService bankProcessingService =
-        new(registrService, bankService, customerService);
+        new BankProcessingService(registrService, bankService, customerService);
 
     return bankProcessingService;
 }
@@ -198,3 +198,10 @@ static void SelectClientFunction()
     Console.WriteLine("4. Get All Client");
     Console.WriteLine("5. Get Balance For Client");
 }
+
+Console.WriteLine("================== CLIENT =================\n");
+    Console.WriteLine("1. Post For Client");
+    Console.WriteLine("2. Transfer Money Between Accounts For Client");
+    Console.WriteLine("3. Delete For Client");
+    Console.WriteLine("4. Get All Client");
+    Console.WriteLine("5. Get Balance For Client");

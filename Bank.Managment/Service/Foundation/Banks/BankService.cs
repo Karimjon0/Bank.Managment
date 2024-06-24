@@ -4,21 +4,19 @@
 //----------------------------------------
 
 using Bank.Management.Brokers.Loggings;
+using Bank.Management.Console.Brokers.Storages.BankStorage;
 using Bank.Managment.Broker.Logging;
-using Bank.Managment.Service.Foundation.Banks;
 
 namespace Bank.Management.Console.Services.Foundations.Banks
 {
     internal class BankService : IBankService
     {
-        private readonly IBankStoreageBroker bankBroker;
+        private readonly BankStorageBroker bankBroker;
         private readonly ILoggingBroker loggingBroker;
-
-        public IBankStoreageBroker BankBroker => bankBroker;
 
         public BankService()
         {
-            this.bankBroker = new BankStoreageBroker();
+            this.bankBroker = new BankStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
 
@@ -46,7 +44,7 @@ namespace Bank.Management.Console.Services.Foundations.Banks
         private decimal ValidationAndGetMoney(decimal accountNumberForBank, decimal balance)
         {
             decimal resultWithdrawMoney =
-                this.BankBroker.WithdrawMoney(accountNumberForBank, balance);
+                this.bankBroker.WithdrawMoney(accountNumberForBank, balance);
 
             if (resultWithdrawMoney is 0)
             {
@@ -68,7 +66,7 @@ namespace Bank.Management.Console.Services.Foundations.Banks
                 decimal accountNumberForBank)
         {
             decimal resultGetBalance =
-                this.BankBroker.GetBalance(accountNumberForBank);
+                this.bankBroker.GetBalance(accountNumberForBank);
 
             if (resultGetBalance == 0)
             {
@@ -90,7 +88,7 @@ namespace Bank.Management.Console.Services.Foundations.Banks
             decimal balance)
         {
             bool resultMakingDeposite =
-                this.BankBroker.MakingDeposit(accountNumberForBank, balance);
+                this.bankBroker.MakingDeposit(accountNumberForBank, balance);
             if (resultMakingDeposite is true)
             {
                 this.loggingBroker.LogInformation("Deposite added to bank account.");
@@ -107,30 +105,5 @@ namespace Bank.Management.Console.Services.Foundations.Banks
                 LogError("The parameters required for Deposite are incomplete.");
             return false;
         }
-    }
-
-    internal class BankStoreageBroker : IBankStoreageBroker
-    {
-        public decimal GetBalance(decimal accountNumberForBank)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool MakingDeposit(decimal accountNumberForBank, decimal balance)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal WithdrawMoney(decimal accountNumberForBank, decimal balance)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal interface IBankStoreageBroker
-    {
-        decimal GetBalance(decimal accountNumberForBank);
-        bool MakingDeposit(decimal accountNumberForBank, decimal balance);
-        decimal WithdrawMoney(decimal accountNumberForBank, decimal balance);
     }
 }

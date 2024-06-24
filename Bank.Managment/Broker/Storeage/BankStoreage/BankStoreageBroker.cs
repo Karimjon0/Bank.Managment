@@ -1,36 +1,43 @@
-﻿//----------------------------------------
+﻿
+//----------------------------------------
 // Great Code Team (c) All rights reserved
 //----------------------------------------
 
-namespace Bank.Managment.Broker.Storeage.BankStoreage
+using Bank.Management.Console.Services.Foundations.Banks;
+using Bank.Managment.Broker.Storeage.BankStoreage;
+
+namespace Bank.Management.Console.Brokers.Storages.BankStorage
 {
-    internal class BankBroker : IBankBroker
+    internal class BankStorageBroker : IBankStoreageBroker
     {
+
         private readonly string filePath = "../../../Assets/BankFileDB.txt";
 
-        public BankBroker()
+        public BankStorageBroker()
         {
-            EnsureFileExists();
+            EnsurFileExists();
         }
 
         public decimal GetBalance(decimal accountNumberForBank)
         {
             if (accountNumberForBank.ToString().Length >= 20)
             {
-                string[] depositsLines = File.ReadAllLines(filePath);
+                string[] depositLines = File.ReadAllLines(filePath);
 
-                for (int itaration = 0; itaration < depositsLines.Length; itaration++)
+                for (int itarator = 0; itarator < depositLines.Length; itarator++)
                 {
-                    string depositeLine = depositsLines[itaration];
-                    string[] depositeInfo = depositeLine.Split('*');
+                    string depositeLine = depositLines[itarator];
+                    string[] depositInfo = depositeLine.Split('*');
 
-                    if (depositeInfo[0].Contains(accountNumberForBank.ToString()))
+                    if (depositInfo[0].Contains(accountNumberForBank.ToString()))
                     {
-                        return Convert.ToDecimal(depositeInfo[1]);
+                        return Convert.ToDecimal(depositInfo[1]);
                     }
                 }
+
                 return 0;
             }
+
             return 0;
         }
 
@@ -38,30 +45,30 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
         {
             if (accountNumberForBank.ToString().Length >= 20)
             {
-                string[] depositsLines = File.ReadAllLines(filePath);
+                string[] depositLines = File.ReadAllLines(filePath);
 
-                for (int itaration = 0; itaration < depositsLines.Length; itaration++)
+                for (int itarator = 0; itarator < depositLines.Length; itarator++)
                 {
-                    string depositeLine = depositsLines[itaration];
-                    string[] depositeInfo = depositeLine.Split('*');
+                    string depositeLine = depositLines[itarator];
+                    string[] depositInfo = depositeLine.Split('*');
 
-                    if (depositeInfo[0].Contains(accountNumberForBank.ToString()))
+                    if (depositInfo[0].Contains(accountNumberForBank.ToString()))
                     {
-                        depositeInfo[1] = (Convert.ToDecimal(depositeInfo[1]) + balance).ToString();
-                        depositeLine = $"{depositeInfo[0]}*{depositeInfo[1]}";
-                        depositsLines[itaration] = depositeLine;
+                        depositInfo[1] = (Convert.ToDecimal(depositInfo[1]) + balance).ToString();
+                        depositeLine = $"{depositInfo[0]}*{depositInfo[1]}";
+                        depositLines[itarator] = depositeLine;
 
                         File.Delete(filePath);
-                        File.WriteAllLines(filePath, depositsLines);
+                        File.WriteAllLines(filePath, depositLines);
                         return true;
                     }
                 }
 
                 string newDeposite = $"{accountNumberForBank}*{balance}\n";
                 File.AppendAllText(filePath, newDeposite);
-
                 return true;
             }
+
             return false;
         }
 
@@ -69,29 +76,30 @@ namespace Bank.Managment.Broker.Storeage.BankStoreage
         {
             if (accountNumberForBank.ToString().Length >= 20)
             {
-                string[] depositsLines = File.ReadAllLines(filePath);
+                string[] depositLines = File.ReadAllLines(filePath);
 
-                for (int itaration = 0; itaration < depositsLines.Length; itaration++)
+                for (int itarator = 0; itarator < depositLines.Length; itarator++)
                 {
-                    string depositeLine = depositsLines[itaration];
-                    string[] depositeInfo = depositeLine.Split('*');
+                    string depositeLine = depositLines[itarator];
+                    string[] depositInfo = depositeLine.Split('*');
 
-                    if (depositeInfo[0].Contains(accountNumberForBank.ToString())
-                        && Convert.ToDecimal(depositeInfo[1]) >= balance)
+                    if (depositInfo[0].Contains(accountNumberForBank.ToString()))
                     {
-                        depositeInfo[1] = (Convert.ToDecimal(depositeInfo[1]) - balance).ToString();
-                        depositeLine = $"{depositeInfo[0]}*{depositeInfo[1]}";
-                        depositsLines[itaration] = depositeLine;
+                        depositInfo[1] = (Convert.ToDecimal(depositInfo[1]) - balance).ToString();
+                        depositeLine = $"{depositInfo[0]}*{depositInfo[1]}";
+                        depositLines[itarator] = depositeLine;
 
                         File.Delete(filePath);
-                        File.WriteAllLines(filePath, depositsLines);
+                        File.WriteAllLines(filePath, depositLines);
                         return balance;
                     }
                 }
             }
+
             return 0;
         }
-        private void EnsureFileExists()
+
+        private void EnsurFileExists()
         {
             bool isFileThere = File.Exists(filePath);
 
