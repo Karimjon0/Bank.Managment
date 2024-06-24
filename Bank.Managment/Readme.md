@@ -8,14 +8,41 @@
 
 ### Exemple
 ------------
-##### Sign Up
+#### Sign Up
 ![home pages](Images/SignUp.gif)
 
 ------------
-##### Log In
+#### Log In
 ![home pages](Images/LogIn.gif)
 
 -----------
-##### 
+### Bank
++ Post Deposit For Bank
+![home pages](Images/PostDeposit.gif)
+
++ Get Money For Bank
+![home pages](Images/GetMoney.gif)
+
++ Get Balance For Bank
+![home pages](Images/GetBalance.gif)
+
+----------
+### Client
++ Post For Client
+![home pages](Images/PostClient.gif)
+
++ Transfer Money Between Accounts For Client
+![home pages](Images/TransferMoney.gif)
+
++ Delete For Client
+![home pages](Images/DeleteClient.gif)
+
++ Get All Client
+![home pages](Images/AllClient.gif)
+
++ Get Balance For Client
+![home pages](Images/BalanceClient.gif)
+
+
 
 
