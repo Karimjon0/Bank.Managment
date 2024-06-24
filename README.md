@@ -1,17 +1,21 @@
-# Bank.Managment
+## Bank.Managment
 --------------------------------------------------------
-## Through this program you can access the Online Bank
-### What can he do?
-+ If you have an account, you can log in using "Login".
+### Through this program you can access the Online Bank
+#### What can he do?
++ If you have an account, you can log in using "Log In".
 + If you don't have an account, you can sign in using "Sign Up".
 -------------------------------------------------------
 
-## Exemple
+### Exemple
 ------------
-### For the Bank
+##### Sign Up
+![home pages](Images/SignUp.gif)
+
+------------
+##### Log In
+![home pages](Images/LogIn.gif)
+
 -----------
-+ 1.1 Post Deposit For Bank
+##### 
 
 
-
-+ 2.1 Get Money For Bank
